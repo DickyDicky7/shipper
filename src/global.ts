@@ -44,9 +44,19 @@ const StaffResultStore: Writable<StaffResult> = writable({
     }
 });
 
+type GeneralDisplay = {
+    title: string,
+};
+
+const GeneralDisplayStore: Writable<GeneralDisplay> = writable({
+    title: "None",
+});
+
 export {
     type AuthResult,
     AuthResultStore,
     type StaffResult,
     StaffResultStore,
+    type GeneralDisplay,
+    GeneralDisplayStore,
 };
