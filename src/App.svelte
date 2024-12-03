@@ -2,10 +2,22 @@
     import "beercss";
     import "material-dynamic-colors";
     import Auth from "./lib/Auth.svelte";
-    import { AuthResultStore, GeneralDisplayStore } from "./global";
+    import {    AuthResultStore,
+            GeneralDisplayStore,
+            ScreensHistoryStore,
+            SCREEN             ,
+           }    from "./global";
     import Home from "./lib/Home.svelte";
     import { onMount }    from                      "svelte";
     import ShipperProfile from "./lib/ShipperProfile.svelte";
+    import DeliverNew from
+    "./lib/DeliverNew.svelte";
+    import  PickUpNew from
+     "./lib/PickUpNew.svelte";
+    import DeliverOnGoing from
+    "./lib/DeliverOnGoing.svelte";
+    import  PickUpOnGoing from
+     "./lib/PickUpOnGoing.svelte";
     onMount(async () => {
         await ui("theme", "#FF5722");
     });
@@ -14,12 +26,22 @@
     ) => {
         await ui("#shipper-profile");
     };
+    const OnClick_PressedGo_BackButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        $ScreensHistoryStore =
+        $ScreensHistoryStore.slice(0, -1);
+        console.log($ScreensHistoryStore);
+    };
+
+    let lastScreen: SCREEN;
+    ScreensHistoryStore.subscribe((screens: SCREEN[]) => lastScreen = screens.at(-1) ?? SCREEN.HOME);
 </script>
 
 <header class="primary-container">
     <nav>
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="circle transparent">
+        <button class="circle transparent" on:click={OnClick_PressedGo_BackButton}>
             <i class="fa-solid fa-arrow-left"></i>
         </button>
         <h5 class="max">{$GeneralDisplayStore.title}</h5>
@@ -39,7 +61,17 @@
 </header>
 <main class="responsive">
     {#if $AuthResultStore.data.id !== ""}
+        {#if lastScreen === SCREEN.HOME}
         <Home></Home>
+        {:else if lastScreen === SCREEN.DELIVER_NEW}
+        <DeliverNew></DeliverNew>
+        {:else if lastScreen === SCREEN.DELIVER_ON_GOING}
+        <DeliverOnGoing></DeliverOnGoing>
+        {:else if lastScreen === SCREEN.PICK_UP_NEW}
+        <PickUpNew></PickUpNew>
+        {:else if lastScreen === SCREEN.PICK_UP_ON_GOING}
+        <PickUpOnGoing></PickUpOnGoing>
+        {/if}
         <ShipperProfile></ShipperProfile>
     {:else}
         <Auth></Auth>

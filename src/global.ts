@@ -52,6 +52,20 @@ const GeneralDisplayStore: Writable<GeneralDisplay> = writable({
     title: "None",
 });
 
+enum SCREEN {
+    HOME            ,
+    AUTH            ,
+    PICK_UP_NEW     ,
+    PICK_UP_ON_GOING,
+    DELIVER_NEW     ,
+    DELIVER_ON_GOING,
+};
+
+const                ScreensHistoryStore
+  :   Writable<Array<SCREEN>> = writable([
+
+]);
+
 export {
     type AuthResult,
     AuthResultStore,
@@ -59,4 +73,7 @@ export {
     StaffResultStore,
     type GeneralDisplay,
     GeneralDisplayStore,
+    SCREEN             ,
+    ScreensHistoryStore,
 };
+
