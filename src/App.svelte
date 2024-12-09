@@ -10,14 +10,17 @@
     import Home from "./lib/Home.svelte";
     import { onMount }    from                      "svelte";
     import ShipperProfile from "./lib/ShipperProfile.svelte";
-    import DeliverNew from
-    "./lib/DeliverNew.svelte";
-    import  PickUpNew from
-     "./lib/PickUpNew.svelte";
+    import DeliverPick_Up from
+    "./lib/DeliverPick_Up.svelte";
     import DeliverOnGoing from
     "./lib/DeliverOnGoing.svelte";
-    import  PickUpOnGoing from
-     "./lib/PickUpOnGoing.svelte";
+    import DeliverHistory from
+    "./lib/DeliverHistory.svelte";
+    import DeliverUnknown from
+    "./lib/DeliverUnknown.svelte";
+    import Deliver_Detail from
+    "./lib/Deliver_Detail.svelte";
+    import DeliverPickUp from "./lib/DeliverPick_Up.svelte";
     onMount(async () => {
         await ui("theme", "#FF5722");
     });
@@ -38,7 +41,7 @@
     ScreensHistoryStore.subscribe((screens: SCREEN[]) => lastScreen = screens.at(-1) ?? SCREEN.HOME);
 </script>
 
-<header class="primary-container">
+<header class="primary-container fixed">
     <nav>
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button class="circle transparent" on:click={OnClick_PressedGo_BackButton}>
@@ -63,16 +66,17 @@
     {#if $AuthResultStore.data.id !== ""}
         {#if lastScreen === SCREEN.HOME}
         <Home></Home>
-        {:else if lastScreen === SCREEN.DELIVER_NEW}
-        <DeliverNew></DeliverNew>
-        {:else if lastScreen === SCREEN.DELIVER_ON_GOING}
+        {:else if lastScreen === SCREEN.DELIVER_PICK_UP}
+        <DeliverPickUp></DeliverPickUp>
+        {:else if lastScreen === SCREEN.DELIVER_ONGOING}
         <DeliverOnGoing></DeliverOnGoing>
-        {:else if lastScreen === SCREEN.PICK_UP_NEW}
-        <PickUpNew></PickUpNew>
-        {:else if lastScreen === SCREEN.PICK_UP_ON_GOING}
-        <PickUpOnGoing></PickUpOnGoing>
+        {:else if lastScreen === SCREEN.DELIVER_HISTORY}
+        <DeliverHistory></DeliverHistory>
+        {:else if lastScreen === SCREEN.DELIVER_UNKNOWN}
+        <DeliverUnknown></DeliverUnknown>
         {/if}
         <ShipperProfile></ShipperProfile>
+        <Deliver_Detail></Deliver_Detail>
     {:else}
         <Auth></Auth>
     {/if}
@@ -80,7 +84,7 @@
     <div class="snackbar error   " id="fail-snackbar">Some text here</div>
     <div class="snackbar         " id="info-snackbar">Some text here</div>
 </main>
-<footer class="primary-container">
+<footer class="primary-container fixed">
     <nav>
         <div class="max row center-align">
             <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -108,4 +112,8 @@
 </footer>
 
 <style>
+    * {
+        font-family: 'SF Mono Regular', 'fontawesome';
+    }
 </style>
+

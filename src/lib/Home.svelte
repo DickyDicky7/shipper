@@ -30,28 +30,28 @@
     });
 
 
-    const OnClick_GoToDeliverNewButton = async (
+    const OnClick_GoToDeliverPick_UpButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
-        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.DELIVER_NEW];
-        console.log($ScreensHistoryStore);
-    };
-    const OnClick_GoToPickUp_NewButton = async (
-        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
-    ) => {
-        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.PICK_UP_NEW];
+        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.DELIVER_PICK_UP];
         console.log($ScreensHistoryStore);
     };
     const OnClick_GoToDeliverOnGoingButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
-        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.DELIVER_ON_GOING];
+        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.DELIVER_ONGOING];
         console.log($ScreensHistoryStore);
     };
-    const OnClick_GoToPickUp_OnGoingButton = async (
+    const OnClick_GoToDeliverHistoryButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
-        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.PICK_UP_ON_GOING];
+        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.DELIVER_HISTORY];
+        console.log($ScreensHistoryStore);
+    };
+    const OnClick_GoToDeliverUnknownButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        $ScreensHistoryStore = [... $ScreensHistoryStore, SCREEN.DELIVER_UNKNOWN];
         console.log($ScreensHistoryStore);
     };
 
@@ -63,23 +63,23 @@
 
 <!-- <h1 class="center-align">Home</h1> -->
 <div class="absolute center middle">
-    <button class="extend circle large-elevate inverse-primary  left-round    top-round" on:click={OnClick_GoToPickUp_NewButton}>
+    <button class="extend circle large-elevate inverse-primary  left-round    top-round" on:click={OnClick_GoToDeliverPick_UpButton}>
         <i class="fa-solid fa-cube"></i>
-        <span>Pick Up New</span>
+        <span>Deliver Pick Up</span>
     </button>
     <hr class="medium">
-    <button class="extend circle large-elevate         primary right-round    top-round" on:click={OnClick_GoToPickUp_OnGoingButton}>
+    <button class="extend circle large-elevate         primary right-round    top-round" on:click={OnClick_GoToDeliverOnGoingButton}>
         <i>add</i>
-        <span>Pick Up On Going</span>
+        <span>Deliver OnGoing</span>
     </button>
     <hr class="medium">
-    <button class="extend circle large-elevate inverse-primary right-round bottom-round" on:click={OnClick_GoToDeliverNewButton}>
+    <button class="extend circle large-elevate inverse-primary right-round bottom-round" on:click={OnClick_GoToDeliverHistoryButton}>
         <i>add</i>
-        <span>Deliver New</span>
+        <span>Deliver History</span>
     </button>
     <hr class="medium">
-    <button class="extend circle large-elevate         primary  left-round bottom-round" on:click={OnClick_GoToDeliverOnGoingButton}>
+    <button class="extend circle large-elevate         primary  left-round bottom-round" on:click={OnClick_GoToDeliverUnknownButton}>
         <i>add</i>
-        <span>Deliver On Going</span>
+        <span>Deliver Unknown</span>
     </button>
 </div>
