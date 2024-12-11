@@ -102,6 +102,8 @@ type Order = {
     message     : string,
     podTxt      : string,
     podImg      : string,
+    payStatus   : string,
+    payWith     : string,
 };
 
 type Delivery = {
