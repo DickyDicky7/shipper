@@ -204,6 +204,9 @@ const DeliverUnknownStore: Writable<Delivery[]> = writable(Array.from({ length: 
     };
 }));
 
+const CurrentDeliveryStore: Writable<Delivery> = writable();
+const CurrentOrder___Store: Writable<Order   > = writable();
+
 export {
     type AuthResult,
     AuthResultStore,
@@ -221,5 +224,7 @@ export {
     DeliverOnGoingStore,
     DeliverHistoryStore,
     DeliverUnknownStore,
+    CurrentDeliveryStore,
+    CurrentOrder___Store,
 };
 

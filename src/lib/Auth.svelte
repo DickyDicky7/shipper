@@ -18,7 +18,8 @@
             },
         );
         console.dir(authResult, { depth: null });
-        if (authResult.status === 200) {
+        if (authResult.status === 200
+        ||  authResult.status === 201) {
             AuthResultStore.set(authResult.data);
             ui("#succ-snackbar");
         } else {

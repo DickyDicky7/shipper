@@ -1,33 +1,52 @@
 <script lang="ts">
+    import axios from "axios";
     import { GeneralDisplayStore,
              ScreensHistoryStore,
              SCREEN             ,
              isScrolledToBottom ,
              DeliverPick_UpStore,
+             CurrentDeliveryStore,
+             CurrentOrder___Store,
+             StaffResultStore,
            } from "../global";
 
     $GeneralDisplayStore.title    =     "Deliver Pick Up"    ;
 //  $ScreensHistoryStore.push(    SCREEN.DELIVER_PICK_UP    );
 
     const SelectDeliverPick_Up    = async (): Promise<void> => {
-
+        const result = await axios.get(
+            `https://waseminarcnpm2.azurewebsites.net/protected/deliveries/staff?staffId=${$StaffResultStore.staff._id}`
+        );
+        if (result.status === 200
+        ||  result.status === 201) {
+            $DeliverPick_UpStore = result.data
+                                         .list
+            ;
+            $DeliverPick_UpStore = $DeliverPick_UpStore.filter(deliver =>
+                deliver.status === "pending"
+            )
+            ;
+        }
     };
 
 </script>
 
 <!-- <div>Deliver Pick Up</div> -->
-<div class="        max     col    scroll">
-  {#each $DeliverPick_UpStore as deliver (deliver._id)}
-      <div class="row padding surface-container wave large-elevate"
-        on:click={    async() =>
-                      await   ui                                 ("#deliver-detail")}
-      >
-          <button class="circle primary">{deliver._id}</button>
-          <div    class="           max">
-              <h6 class="small">Headline</h6 >
-              <div>##### Supporting text</div>
-          </div >
-          <label>+15 min</label>
-      </div>
+<div class="        max     col  scroll">
+  {#each $DeliverPick_UpStore as deliver, deliverIndex (deliver._id)}
+        <!-- svelte-ignore a11y_click_events_have_key_events --><!-- svelte-ignore a11y_no_static_element_interactions --><!-- svelte-ignore a11y_label_has_associated_control -->
+        <div class="row padding surface-container wave large-elevate"
+          on:click={    async() => {
+        $CurrentDeliveryStore = $DeliverPick_UpStore[deliverIndex]
+                        await   ui                                 ("#deliver-detail")
+        }}
+        >
+            <button class="circle primary">{deliver._id}</button>
+            <div    class="           max">
+                <h6 class="small">Headline</h6 >
+                <div>##### Supporting text</div>
+            </div >
+            <label>+15 min</label>
+        </div>
   {/each}
 </div>

@@ -1,11 +1,40 @@
 <script lang="ts">
+    import     axios   from "axios"       ;
+    import { onMount } from       "svelte";
+    import {
+        CurrentDeliveryStore,
+        CurrentOrder___Store,
+    } from "../global";
+
     const OnClick_CloseButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
         await ui("#deliver-detail");
     };
 
+    const OnClick_QRCodeButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        await ui("#deliver-detail");
+    };
+
+    const OnClick_CameraButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        await ui("#deliver-detail");
+    };
+
     let tabNumber: number = 1;
+
+    onMount(async () => {
+        const result = await axios.get(
+           `https://waseminarcnpm2.azurewebsites.net/protected/order?id=${$CurrentDeliveryStore.orderId}`
+        );
+        if (result.status === 200
+        ||  result.status === 201) {
+            $CurrentOrder___Store = result.data ;
+        }
+    });
 </script>
 
 <dialog  class="max" id="deliver-detail">
@@ -13,12 +42,12 @@
         <div>
             <div class="                  small-space        "></div>
             <nav class="         tabbed   small large-elevate">
-                <!-- svelte-ignore a11y_missing_attribute -->
+                <!-- svelte-ignore a11y_missing_attribute --><!-- svelte-ignore a11y_click_events_have_key_events --><!-- svelte-ignore a11y_no_static_element_interactions -->
                 <a class={`${tabNumber === 1 ? "active" : ""}`} on:click={async () => { tabNumber = 1; }}>
                     <i>info</i>
                     <span>Info Delivery</span>
                 </a>
-                <!-- svelte-ignore a11y_missing_attribute -->
+                <!-- svelte-ignore a11y_missing_attribute --><!-- svelte-ignore a11y_click_events_have_key_events --><!-- svelte-ignore a11y_no_static_element_interactions -->
                 <a class={`${tabNumber === 2 ? "active" : ""}`} on:click={async () => { tabNumber = 2; }}>
                     <i>info</i>
                     <span>Info Order@@@</span>
@@ -94,7 +123,15 @@
     </div>
     <div class="padding absolute center  bottom              "                               >
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="circle primary-container large-elevate" on:click={OnClick_CloseButton}>
+        <button class="center-align square primary-container large-elevate" on:click={OnClick_QRCodeButton}>
+            <i  class="fa-solid fa-qrcode"></i>
+        </button>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="center-align square primary-container large-elevate" on:click={OnClick_CameraButton}>
+            <i  class="fa-solid fa-camera"></i>
+        </button>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="center-align square primary-container large-elevate" on:click={OnClick_CloseButton}>
             <i  class="fa-solid fa-xmark"></i>
         </button>
     </div>

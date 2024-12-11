@@ -24,7 +24,8 @@
             },
         );
         console.dir(staffResult, { depth: null });
-        if (staffResult.status === 200) {
+        if (staffResult.status === 200
+        ||  staffResult.status === 201) {
             StaffResultStore.set(staffResult.data);
         }
     });
