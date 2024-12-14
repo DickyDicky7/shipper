@@ -6,6 +6,11 @@
             GeneralDisplayStore,
             ScreensHistoryStore,
             SCREEN             ,
+            CurrentDeliveryStore,
+            CurrentOrder___Store,
+            DisplaySuccSnackbar,
+            DisplayFailSnackbar,
+            DisplayInfoSnackbar,
            }    from "./global";
     import Home from "./lib/Home.svelte";
     import { onMount }    from                      "svelte";
@@ -36,6 +41,9 @@
         $ScreensHistoryStore.slice(0, -1);
         console.log($ScreensHistoryStore);
     };
+
+    window.onunhandledrejection = async (e: PromiseRejectionEvent) => {                            await DisplayFailSnackbar(e.reason, 10000); };
+    window.onerror              = async (e: string    |     Event) => { if (!(e instanceof Event)) await DisplayFailSnackbar(e       , 10000); };
 
     let lastScreen: SCREEN;
     ScreensHistoryStore.subscribe((screens: SCREEN[]) => lastScreen = screens.at(-1) ?? SCREEN.HOME);

@@ -104,6 +104,8 @@ type Order = {
     podImg      : string,
     payStatus   : string,
     payWith     : string,
+    __v         : number,
+    _id         : string,
 };
 
 type Delivery = {
@@ -204,8 +206,40 @@ const DeliverUnknownStore: Writable<Delivery[]> = writable(Array.from({ length: 
     };
 }));
 
-const CurrentDeliveryStore: Writable<Delivery> = writable();
+const CurrentDeliveryStore: Writable<Delivery> = writable({
+    staffId: ``,
+    orderId: ``,
+      hubId: ``,
+    date        : ``,
+    deliverTimes: 0 ,
+          status: ``,
+    __v         : 0 ,
+    _id         : ``,
+
+});
 const CurrentOrder___Store: Writable<Order   > = writable();
+
+function getUniqueDateTimeString(): string {
+    const now          =        new        Date();
+    const year         =        now.getFullYear();
+    const month        = String(now.getMonth       () + 1).padStart(2, "0");
+    const day          = String(now.getDate        ()    ).padStart(2, "0");
+    const hours        = String(now.getHours       ()    ).padStart(2, "0");
+    const minutes      = String(now.getMinutes     ()    ).padStart(2, "0");
+    const seconds      = String(now.getSeconds     ()    ).padStart(2, "0");
+    const milliseconds = String(now.getMilliseconds()    ).padStart(3, "0");
+    return `${year}${month}${day}_${hours}${minutes}${seconds}${milliseconds}`;
+};
+
+type  QR1 = {
+           orderId: string,
+    deliveryStatus: string,
+};
+
+const QR1Store: Writable<QR1> = writable({
+           orderId: "",
+    deliveryStatus: "",
+});
 
 export {
     type AuthResult,
@@ -226,5 +260,8 @@ export {
     DeliverUnknownStore,
     CurrentDeliveryStore,
     CurrentOrder___Store,
+    getUniqueDateTimeString,
+    type QR1,
+    QR1Store,
 };
 

@@ -2,9 +2,24 @@
     import     axios   from "axios"       ;
     import { onMount } from       "svelte";
     import {
-        CurrentDeliveryStore,
-        CurrentOrder___Store,
+        StaffResultStore       ,
+        CurrentDeliveryStore   ,
+        CurrentOrder___Store   ,
+        getUniqueDateTimeString,
+        DisplaySuccSnackbar    ,
+        DisplayFailSnackbar    ,
+        DisplayInfoSnackbar    ,
+        QR1Store               ,
     } from "../global";
+    import { CapacitorBarcodeScanner
+           , CapacitorBarcodeScannerTypeHint
+           }                            from "@capacitor/barcode-scanner";
+    import { Camera
+           , CameraResultType
+           , CameraSource
+           , CameraDirection
+           ,      type Photo
+    } from "@capacitor/camera";
 
     const OnClick_CloseButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
@@ -15,18 +30,153 @@
     const OnClick_QRCodeButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
-        await ui("#deliver-detail");
+        // await ui("#deliver-detail");
+        const scanQRResult = await CapacitorBarcodeScanner/*----*/.scanBarcode({
+                             hint: CapacitorBarcodeScannerTypeHint.    ALL
+        });
+
+                 $QR1Store = JSON.parse(scanQRResult.ScanResult);
+
+        const updateResult = await axios.put(
+            "/protected/order/devStatus",
+            {
+                  orderId: $QR1Store.       orderId,
+                devStatus: $QR1Store.deliveryStatus,
+//              payStatus:                         ,
+            },
+            {
+                baseURL: "https://waseminarcnpm2.azurewebsites.net",
+            },
+        );
+
+        if (updateResult.status === 200
+        ||  updateResult.status === 201) {
+            await DisplaySuccSnackbar("QR update success", 1000);
+        } else {
+            await DisplayFailSnackbar("QR update failure", 1000);
+            return;
+        }
     };
 
     const OnClick_CameraButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
-        await ui("#deliver-detail");
+        // await ui("#deliver-detail");
+
+        const image = await Camera.getPhoto({            
+            quality           : 100                    ,
+            allowEditing      : true                   ,
+            resultType        : CameraResultType.Base64,
+            saveToGallery     : false                  ,
+            width             : undefined              ,
+            height            : undefined              ,
+            correctOrientation: true                   ,
+            source            : CameraSource    .Prompt,
+            direction         : CameraDirection .Rear  ,
+            presentationStyle : undefined              ,
+            webUseInput       : undefined              ,
+            promptLabelHeader : undefined              ,
+            promptLabelCancel : undefined              ,
+            promptLabelPhoto  : undefined              ,
+            promptLabelPicture: undefined              ,
+        });
+        const imageName: string = `${$StaffResultStore.staff._id}_${getUniqueDateTimeString()}`;
+
+        const result1 = await axios.post(
+            "/protected/delivery/update_status",
+            {
+                deliveryId: $CurrentDeliveryStore._id,
+                    status: "success"                ,
+            },
+            {
+                baseURL: "https://waseminarcnpm2.azurewebsites.net",
+            },
+        );
+
+
+        if (result1.status === 200
+        ||  result1.status === 201) {
+            await DisplaySuccSnackbar("Step 01 success", 1000);
+        } else {
+            await DisplayFailSnackbar("Step 01 failure", 1000);
+            return;
+        }
+
+
+        const result2 = await axios.post(
+            "/up-img",
+            {
+                image    :                 image.base64String,
+                imageName: $CurrentOrder___Store._id         ,
+            },
+            {
+                baseURL: "https://waseminarcnpm2.azurewebsites.net",
+            },
+        );
+
+
+        if (result2.status === 200
+        ||  result2.status === 201) {
+            await DisplaySuccSnackbar("Step 02 success", 1000);
+        } else {
+            await DisplayFailSnackbar("Step 02 failure", 1000);
+            return;
+        }
+
+
+        const result3 = await axios.post(
+            "/protected/extract-text-from-image",
+            {
+                //-----------------------------------------
+                image_url: result2.data.realData.publicUrl,
+                //-----------------------------------------
+            },
+            {
+                //--------------------------------------------------
+                baseURL: "https://waseminarcnpm2.azurewebsites.net",
+                //--------------------------------------------------
+            },
+        );
+
+
+        if (result3.status === 200
+        ||  result3.status === 201) {
+            await DisplaySuccSnackbar("Step 03 success", 1000);
+        } else {
+            await DisplayFailSnackbar("Step 03 failure", 1000);
+            return;
+        }
+
+
+        const result4 = await axios.put(
+            `/protected/order?id=${$CurrentOrder___Store._id}`,
+            {
+                podTxt: result3.data.         extracted_text,
+                podImg: result2.data.realData.publicUrl     ,
+            },
+            {
+                baseURL: "https://waseminarcnpm2.azurewebsites.net",
+            },
+        );
+
+
+        if (result4.status === 200
+        ||  result4.status === 201) {
+            await DisplaySuccSnackbar("Step 04 success", 1000);
+        } else {
+            await DisplayFailSnackbar("Step 04 failure", 1000);
+            return;
+        }
+
     };
 
     let tabNumber: number = 1;
 
-    onMount(async () => {
+    $: (async () => {
+        console.info("call!");
+        if ($CurrentDeliveryStore.orderId === "") {
+              return
+        }
         const result = await axios.get(
            `https://waseminarcnpm2.azurewebsites.net/protected/order?id=${$CurrentDeliveryStore.orderId}`
         );
@@ -34,7 +184,7 @@
         ||  result.status === 201) {
             $CurrentOrder___Store = result.data ;
         }
-    });
+    })();
 </script>
 
 <dialog  class="max" id="deliver-detail">
