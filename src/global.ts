@@ -233,12 +233,16 @@ function getUniqueDateTimeString(): string {
 
 type  QR1 = {
            orderId: string,
+    //obsolete
     deliveryStatus: string,
+    //obsolete
 };
 
 const QR1Store: Writable<QR1> = writable({
            orderId: "",
+    //obsolete
     deliveryStatus: "",
+    //obsolete
 });
 
 export {

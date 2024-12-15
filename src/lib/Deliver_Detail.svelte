@@ -41,7 +41,7 @@
             "/protected/order/devStatus",
             {
                   orderId: $QR1Store.       orderId,
-                devStatus: $QR1Store.deliveryStatus,
+//              devStatus: $QR1Store.deliveryStatus,
 //              payStatus:                         ,
             },
             {
