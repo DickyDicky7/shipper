@@ -1,6 +1,14 @@
 <script lang="ts">
     import axios from "axios";
-    import { AuthResultStore, GeneralDisplayStore } from "../global";
+    import {     AuthResultStore,
+             GeneralDisplayStore,
+             DisplaySuccSnackbar,
+             DisplayFailSnackbar,
+             DisplayInfoSnackbar,
+                    MyBlurParams,
+           } from "../global";
+    import { onMount } from "svelte"           ;
+    import { blur    } from "svelte/transition";
     $GeneralDisplayStore.title = "Auth";
     let username: string = "sh1";
     let password: string = "sh1";

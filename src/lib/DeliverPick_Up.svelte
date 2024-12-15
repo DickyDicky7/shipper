@@ -8,7 +8,13 @@
              CurrentDeliveryStore,
              CurrentOrder___Store,
              StaffResultStore,
+             DisplaySuccSnackbar,
+             DisplayFailSnackbar,
+             DisplayInfoSnackbar,
+             MyBlurParams,
            } from "../global";
+    import { onMount } from "svelte";
+    import { blur    } from "svelte/transition";
 
     $GeneralDisplayStore.title    =     "Deliver Pick Up"    ;
 //  $ScreensHistoryStore.push(    SCREEN.DELIVER_PICK_UP    );
@@ -26,9 +32,15 @@
                 deliver.status === "pending"
             )
             ;
+            await DisplaySuccSnackbar("Fetch success", 1000);
+        } else {
+            await DisplayFailSnackbar("Fetch failure", 1000);
         }
     };
 
+    // onMount(async() => {
+    //         await SelectDeliverPick_Up();
+    // });
 </script>
 
 <!-- <div>Deliver Pick Up</div> -->
@@ -40,7 +52,8 @@
         $CurrentDeliveryStore = $DeliverPick_UpStore[deliverIndex]
                         await   ui                                 ("#deliver-detail")
         }}
-        >
+        transition:blur={
+        MyBlurParams(deliverIndex * 100) }>
             <button class="circle primary">{deliver._id}</button>
             <div    class="           max">
                 <h6 class="small">Headline</h6 >

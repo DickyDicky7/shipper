@@ -174,7 +174,8 @@
 
     $: (async () => {
         console.info("call!");
-        if ($CurrentDeliveryStore.orderId === "") {
+        if ($CurrentDeliveryStore.orderId        === ""
+        ||  $CurrentDeliveryStore.orderId.length === 1) {
               return
         }
         const result = await axios.get(

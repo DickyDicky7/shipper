@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onMount } from "svelte"           ;
+    import { blur    } from "svelte/transition";
     import axios from "axios";
     import {
             AuthResultStore,
@@ -7,6 +8,10 @@
         SCREEN             ,
         ScreensHistoryStore,
            StaffResultStore,
+        DisplaySuccSnackbar,
+        DisplayFailSnackbar,
+        DisplayInfoSnackbar,
+               MyBlurParams,
     } from "../global";
     $GeneralDisplayStore.title    =     "Home"   ;
 //  $ScreensHistoryStore.push(    SCREEN.HOME   );

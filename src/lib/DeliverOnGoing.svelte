@@ -8,7 +8,13 @@
              CurrentDeliveryStore,
              CurrentOrder___Store,
              StaffResultStore,
+             DisplaySuccSnackbar,
+             DisplayFailSnackbar,
+             DisplayInfoSnackbar,
+             MyBlurParams,
            } from "../global";
+    import { onMount } from "svelte";
+    import { blur    } from "svelte/transition";
 
     $GeneralDisplayStore.title    =     "Deliver OnGoing"    ;
 //  $ScreensHistoryStore.push(    SCREEN.DELIVER_ONGOING    );
@@ -26,6 +32,9 @@
                 deliver.status === "inProgress"
             )
             ;
+            await DisplaySuccSnackbar("Fetch success", 1000);
+        } else {
+            await DisplayFailSnackbar("Fetch failure", 1000);
         }
     };
 
@@ -36,6 +45,10 @@
     // window.onwheel     = (e: WheelEvent) => {
     //     if (isScrolledToBottom()) console.log("bottom");
     // };    
+
+    // onMount(async() => {
+    //         await SelectDeliverOnGoing();
+    // });
 </script>
 
 <!-- <div>Deliver OnGoing</div> -->
@@ -47,7 +60,8 @@
         $CurrentDeliveryStore = $DeliverOnGoingStore[deliverIndex]
                         await   ui                                 ("#deliver-detail")
         }}
-        >
+        transition:blur={
+        MyBlurParams(deliverIndex * 100) }>
             <button class="circle primary">{deliver._id}</button>
             <div    class="           max">
                 <h6 class="small">Headline</h6 >

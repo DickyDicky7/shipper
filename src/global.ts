@@ -245,6 +245,21 @@ const QR1Store: Writable<QR1> = writable({
     //obsolete
 });
 
+import * as transition from
+    "svelte/transition"    ;
+import * as easing     from
+    "svelte/easing"        ;
+
+const MyBlurParams = (delay: number): transition.BlurParams => {
+    return {
+        delay   : delay           ,
+        duration: 1000            ,
+        easing  : easing.sineInOut,
+        amount  : 10              ,
+        opacity : 0               ,
+    };
+};
+    
 export {
     type AuthResult,
     AuthResultStore,
@@ -267,5 +282,6 @@ export {
     getUniqueDateTimeString,
     type QR1,
     QR1Store,
+    MyBlurParams,
 };
 
