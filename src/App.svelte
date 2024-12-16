@@ -15,6 +15,8 @@
     import Home from "./lib/Home.svelte";
     import { onMount }    from                      "svelte";
     import ShipperProfile from "./lib/ShipperProfile.svelte";
+    import ShipperGoogleMap
+from"./lib/ShipperGoogleMap.svelte";
     import DeliverPick_Up from
     "./lib/DeliverPick_Up.svelte";
     import DeliverOnGoing from
@@ -34,12 +36,22 @@
     ) => {
         await ui("#shipper-profile");
     };
+    const OnClick_ShipperMessageButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        await ui("#shipper-message");
+    };
     const OnClick_PressedGo_BackButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
         $ScreensHistoryStore =
         $ScreensHistoryStore.slice(0, -1);
         console.log($ScreensHistoryStore);
+    };
+    const OnClick_ShipperGoogleMapButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        await ui("#shipper-google-map");
     };
 
     window.onunhandledrejection = async (e: PromiseRejectionEvent) => {                            await DisplayFailSnackbar(e.reason, 10000); };
@@ -85,6 +97,7 @@
         {/if}
         <ShipperProfile></ShipperProfile>
         <Deliver_Detail></Deliver_Detail>
+        <ShipperGoogleMap></ShipperGoogleMap>
     {:else}
         <Auth></Auth>
     {/if}
@@ -108,11 +121,11 @@
                 <i class="fa-solid fa-user"></i>
             </button>
             <!-- svelte-ignore a11y_consider_explicit_label -->
-            <button class="square transparent">
+            <button class="square transparent" on:click={OnClick_ShipperGoogleMapButton}>
                 <i class="fa-solid fa-map"></i>
             </button>
             <!-- svelte-ignore a11y_consider_explicit_label -->
-            <button class="square transparent">
+            <button class="square transparent" on:click={OnClick_ShipperMessageButton}>
                 <i class="fa-solid fa-message"></i>
             </button>
         </div>
