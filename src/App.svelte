@@ -133,8 +133,19 @@ from"./lib/ShipperGoogleMap.svelte";
 </footer>
 
 <style>
+    @font-face {
+     font-family:            'SF Mono Regular'                        ;
+     font-weight: normal;
+     font-style : normal;
+     src: url('./assets/fonts/SF-Mono-Regular.otf') format('opentype');
+    }
+
     * {
         font-family: 'SF Mono Regular', 'fontawesome';
     }
 </style>
+
+
+
+
 
