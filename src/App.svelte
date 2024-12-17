@@ -29,7 +29,8 @@ from"./lib/ShipperGoogleMap.svelte";
     "./lib/Deliver_Detail.svelte";
     import DeliverPickUp from "./lib/DeliverPick_Up.svelte";
     onMount(async () => {
-        await ui("theme", "#FF5722");
+//      await ui("theme", "#3F51B5");
+        await ui("theme", "#CDDC39");
     });
     const OnClick_ShipperProfileButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }

@@ -252,11 +252,11 @@ import * as easing     from
 
 const MyBlurParams = (delay: number): transition.BlurParams => {
     return {
-        delay   : delay           ,
-        duration: 1000            ,
-        easing  : easing.sineInOut,
-        amount  : 10              ,
-        opacity : 0               ,
+        delay   : delay            ,
+        duration: 1000             ,
+        easing  : easing.quintInOut,
+        amount  : 10               ,
+        opacity : 0                ,
     };
 };
     
