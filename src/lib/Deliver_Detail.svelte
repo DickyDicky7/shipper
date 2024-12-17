@@ -192,7 +192,7 @@
     <div class="padding absolute center     top              "                               >
         <div>
             <div class="                  small-space        "></div>
-            <nav class="         tabbed   small large-elevate">
+            <nav class="         tabbed   small              ">
                 <!-- svelte-ignore a11y_missing_attribute --><!-- svelte-ignore a11y_click_events_have_key_events --><!-- svelte-ignore a11y_no_static_element_interactions -->
                 <a class={`${tabNumber === 1 ? "active" : ""}`} on:click={async () => { tabNumber = 1; }}>
                     <i>info</i>
@@ -208,32 +208,48 @@
                 <div class="medium-space"></div>
                 <h5  class="center-align">Info Delivery</h5>
                 <div class="medium-space"></div>
-            </div>
-            <div class={`page padding left ${tabNumber === 2 ? "active" : ""}`}>
-                <div class="medium-space"></div>
-                <h5  class="center-align">Info Order@@@</h5>
-                <div class="medium-space"></div>
-                <article class="large-elevate">
+                <article class="large-elevate     no-round
+                                             inverse-surface     ">
                     <details>
                         <summary class="none inverse-primary-text">
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave">Header Item</a>
                         </summary>
                         <!-- svelte-ignore a11y_missing_attribute -->
-                        <a class="row wave primary-text">Item</a>
+                        <a class="row wave inverse-surface">Deliver Date?!### ######</a>
                         <!-- svelte-ignore a11y_missing_attribute -->
-                        <a class="row wave primary-text">Item</a>
+                        <a class="row wave inverse-surface">Deliver Times!### ######</a>
+                        <!-- svelte-ignore a11y_missing_attribute -->
+                        <a class="row wave inverse-surface">Deliver Status### ######</a>
+                    </details>
+                </article>
+            </div>
+            <div class={`page padding left ${tabNumber === 2 ? "active" : ""}`}>
+                <div class="medium-space"></div>
+                <h5  class="center-align">Info Order@@@</h5>
+                <div class="medium-space"></div>
+                <article class="large-elevate     no-round
+                                             inverse-surface     ">
+                    <details>
+                        <summary class="none inverse-primary-text">
+                            <!-- svelte-ignore a11y_missing_attribute -->
+                            <a class="row wave">Header Item</a>
+                        </summary>
+                        <!-- svelte-ignore a11y_missing_attribute -->
+                        <a class="row wave inverse-surface">Item</a>
+                        <!-- svelte-ignore a11y_missing_attribute -->
+                        <a class="row wave inverse-surface">Item</a>
                         <details>
                             <summary class="none inverse-primary-text">
                                 <!-- svelte-ignore a11y_missing_attribute -->
                                 <a class="row wave">Sender Info</a>
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Sender name### ######</a>
+                            <a class="row wave inverse-surface">Sender name### ######</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Sender address ######</a>
+                            <a class="row wave inverse-surface">Sender address ######</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Sender #phone# number</a>
+                            <a class="row wave inverse-surface">Sender #phone# number</a>
                         </details>
                         <details>
                             <summary class="none inverse-primary-text">
@@ -241,11 +257,11 @@
                                 <a class="row wave">Receiver Info</a>
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Receiver name### ######</a>
+                            <a class="row wave inverse-surface">Receiver name### ######</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Receiver address ######</a>
+                            <a class="row wave inverse-surface">Receiver address ######</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Receiver #phone# number</a>
+                            <a class="row wave inverse-surface">Receiver #phone# number</a>
                         </details>
                         <details>
                             <summary class="none inverse-primary-text">
@@ -253,19 +269,19 @@
                                 <a class="row wave">Delivery Info</a>
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Shipment type</a>
+                            <a class="row wave inverse-surface">Shipment type</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Delivery type</a>
+                            <a class="row wave inverse-surface">Delivery type</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Status</a>
+                            <a class="row wave inverse-surface">Status</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Package size</a>
+                            <a class="row wave inverse-surface">Package size</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Pick up date</a>
+                            <a class="row wave inverse-surface">Pick up date</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Pick up time</a>
+                            <a class="row wave inverse-surface">Pick up time</a>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave primary-text">Value</a>
+                            <a class="row wave inverse-surface">Value</a>
                         </details>
                     </details>
                 </article>

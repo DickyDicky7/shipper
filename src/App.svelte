@@ -15,6 +15,7 @@
     import Home from "./lib/Home.svelte";
     import { onMount }    from                      "svelte";
     import ShipperProfile from "./lib/ShipperProfile.svelte";
+    import ShipperCalling from "./lib/ShipperCalling.svelte";
     import ShipperGoogleMap
 from"./lib/ShipperGoogleMap.svelte";
     import DeliverPick_Up from
@@ -32,6 +33,11 @@ from"./lib/ShipperGoogleMap.svelte";
 //      await ui("theme", "#3F51B5");
         await ui("theme", "#CDDC39");
     });
+    const OnClick_ShipperCallingButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        await ui("#shipper-calling");
+    };
     const OnClick_ShipperProfileButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
@@ -96,21 +102,22 @@ from"./lib/ShipperGoogleMap.svelte";
         {:else if lastScreen === SCREEN.DELIVER_UNKNOWN}
         <DeliverUnknown></DeliverUnknown>
         {/if}
+        <ShipperCalling></ShipperCalling>
         <ShipperProfile></ShipperProfile>
         <Deliver_Detail></Deliver_Detail>
         <ShipperGoogleMap></ShipperGoogleMap>
     {:else}
         <Auth></Auth>
     {/if}
-    <div class="snackbar tertiary" id="succ-snackbar">Some text here</div>
-    <div class="snackbar error   " id="fail-snackbar">Some text here</div>
-    <div class="snackbar         " id="info-snackbar">Some text here</div>
+    <div class="snackbar tertiary       " id="succ-snackbar">Some text here</div>
+    <div class="snackbar error          " id="fail-snackbar">Some text here</div>
+    <div class="snackbar inverse-surface" id="info-snackbar">Some text here</div>
 </main>
 <footer class="primary-container fixed">
     <nav>
         <div class="max row center-align">
             <!-- svelte-ignore a11y_consider_explicit_label -->
-            <button class="square transparent">
+            <button class="square transparent" on:click={OnClick_ShipperCallingButton}>
                 <i class="fa-solid fa-phone"></i>
             </button>
             <!-- svelte-ignore a11y_consider_explicit_label -->

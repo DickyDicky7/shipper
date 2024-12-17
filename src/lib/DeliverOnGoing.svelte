@@ -55,15 +55,15 @@
 <div class="        max     col    scroll">
     {#each $DeliverOnGoingStore as deliver, deliverIndex (deliver._id)}
         <!-- svelte-ignore a11y_click_events_have_key_events --><!-- svelte-ignore a11y_no_static_element_interactions --><!-- svelte-ignore a11y_label_has_associated_control -->
-        <div class="row padding surface-container wave large-elevate"
+        <div class="row padding surface-dim wave large-elevate"
           on:click={    async() => {
         $CurrentDeliveryStore = $DeliverOnGoingStore[deliverIndex]
                         await   ui                                 ("#deliver-detail")
         }}
         transition:blur={
         MyBlurParams(deliverIndex * 100) }>
-            <button class="circle primary">{deliver._id}</button>
-            <div    class="           max">
+            <button class="circle inverse-surface">{deliver._id}</button>
+            <div    class="           max        ">
                 <h6 class="small">Headline</h6 >
                 <div>##### Supporting text</div>
             </div >

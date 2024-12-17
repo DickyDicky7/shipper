@@ -77,7 +77,7 @@
     <div class="padding absolute center
                                  bottom ">
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="circle primary-container large-elevate" on:click={OnClick_CloseButton}>
+        <button class="circle error large-elevate" on:click={OnClick_CloseButton}>
             <i  class="fa-solid fa-xmark"></i>
         </button>
     </div>

@@ -69,23 +69,23 @@
 
 <!-- <h1 class="center-align">Home</h1> -->
 <div class="absolute center middle">
-    <button class="extend circle large-elevate inverse-primary  left-round    top-round" on:click={OnClick_GoToDeliverPick_UpButton}>
-        <i class="fa-solid fa-cube"></i>
+    <button class="extend circle large-elevate primary-container  left-round    top-round" on:click={OnClick_GoToDeliverPick_UpButton}>
+        <i class="fa-solid fa-angles-down"></i>
         <span>Deliver Pick Up</span>
     </button>
-    <hr class="medium">
-    <button class="extend circle large-elevate         primary right-round    top-round" on:click={OnClick_GoToDeliverOnGoingButton}>
-        <i>add</i>
+    <hr class="medium surface-dim">
+    <button class="extend circle large-elevate inverse-surface   right-round    top-round" on:click={OnClick_GoToDeliverOnGoingButton}>
+        <i class="fa-solid fa-angles-up  "></i>
         <span>Deliver OnGoing</span>
     </button>
-    <hr class="medium">
-    <button class="extend circle large-elevate inverse-primary right-round bottom-round" on:click={OnClick_GoToDeliverHistoryButton}>
-        <i>add</i>
+    <hr class="medium surface-dim">
+    <button class="extend circle large-elevate primary-container right-round bottom-round" on:click={OnClick_GoToDeliverHistoryButton}>
+        <i class="fa-solid fa-clock-rotate-left"></i>
         <span>Deliver History</span>
     </button>
-    <hr class="medium">
-    <button class="extend circle large-elevate         primary  left-round bottom-round" on:click={OnClick_GoToDeliverUnknownButton}>
-        <i>add</i>
+    <hr class="medium surface-dim">
+    <button class="extend circle large-elevate inverse-surface    left-round bottom-round" on:click={OnClick_GoToDeliverUnknownButton}>
+        <i class="fa-solid fa-question"></i>
         <span>Deliver Unknown</span>
     </button>
 </div>

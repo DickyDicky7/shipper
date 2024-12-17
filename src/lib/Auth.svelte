@@ -42,17 +42,17 @@
 
 <div class="padding absolute center middle">
     <!-- svelte-ignore a11y_label_has_associated_control -->
-    <div class="field label round center large-elevate extra">
+    <div class="field label round center large-elevate medium surface-dim">
         <input type="text" bind:value={username} />
         <label>Username</label>
     </div>
     <!-- svelte-ignore a11y_label_has_associated_control -->
-    <div class="field label round center large-elevate extra">
+    <div class="field label round center large-elevate medium surface-dim">
         <input type="text" bind:value={password} />
         <label>Password</label>
     </div>
     <button
-        class="center large-elevate inverse-primary"
+        class="center large-elevate inverse-surface"
         on:click={OnClick_SignInButton}>Sign In</button
     >
 </div>
