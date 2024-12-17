@@ -68,7 +68,7 @@
 </script>
 
 <!-- <h1 class="center-align">Home</h1> -->
-<div class="absolute center middle">
+<div class="absolute center middle center-align">
     <button class="extend circle large-elevate primary-container  left-round    top-round" on:click={OnClick_GoToDeliverPick_UpButton}>
         <i class="fa-solid fa-angles-down"></i>
         <span>Deliver Pick Up</span>
