@@ -38,9 +38,9 @@
         }
     };
 
-    // onMount(async() => {
-    //         await SelectDeliverPick_Up();
-    // });
+    onMount(async() => {
+            await SelectDeliverPick_Up();
+    });
 </script>
 
 <!-- <div>Deliver Pick Up</div> -->

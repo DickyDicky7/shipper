@@ -272,17 +272,17 @@
             </div>
         </div>
     </div>
-    <div class="padding absolute center  bottom              "                               >
+    <div class="padding absolute center bottom center-align">
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="center-align square primary-container large-elevate" on:click={OnClick_QRCodeButton}>
+        <button class="center-align circle primary-container large-elevate" on:click={OnClick_QRCodeButton}>
             <i  class="fa-solid fa-qrcode"></i>
         </button>
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="center-align square primary-container large-elevate" on:click={OnClick_CameraButton}>
+        <button class="center-align circle primary-container large-elevate" on:click={OnClick_CameraButton}>
             <i  class="fa-solid fa-camera"></i>
         </button>
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="center-align square primary-container large-elevate" on:click={OnClick_CloseButton}>
+        <button class="center-align circle primary-container large-elevate" on:click={OnClick_CloseButton}>
             <i  class="fa-solid fa-xmark"></i>
         </button>
     </div>
