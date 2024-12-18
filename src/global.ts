@@ -259,7 +259,7 @@ const MyBlurParams = (delay: number): transition.BlurParams => {
         opacity : 0                ,
     };
 };
-    
+
 export {
     type AuthResult,
     AuthResultStore,

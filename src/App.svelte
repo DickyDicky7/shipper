@@ -28,7 +28,7 @@ from"./lib/ShipperGoogleMap.svelte";
     "./lib/DeliverUnknown.svelte";
     import Deliver_Detail from
     "./lib/Deliver_Detail.svelte";
-    import DeliverPickUp from "./lib/DeliverPick_Up.svelte";
+    import { App } from "@capacitor/app";
     onMount(async () => {
 //      await ui("theme", "#3F51B5");
         await ui("theme", "#CDDC39");
@@ -66,6 +66,24 @@ from"./lib/ShipperGoogleMap.svelte";
 
     let lastScreen: SCREEN;
     ScreensHistoryStore.subscribe((screens: SCREEN[]) => lastScreen = screens.at(-1) ?? SCREEN.HOME);
+
+    App.addListener("backButton", async () => {
+        if (document.getElementById("deliver-detail")?.className.includes("active")) {
+            await ui("#deliver-detail");
+        }
+        if (document.getElementById("shipper-calling")?.className.includes("active")) {
+            await ui("#shipper-calling");
+        }
+        if (document.getElementById("shipper-profile")?.className.includes("active")) {
+            await ui("#shipper-profile");
+        }
+        if (document.getElementById("shipper-message")?.className.includes("active")) {
+            await ui("#shipper-message");
+        }
+        if (document.getElementById("shipper-google-map")?.className.includes("active")) {
+            await ui("#shipper-google-map");
+        }
+    });
 </script>
 
 <header class="primary-container fixed">
@@ -94,7 +112,7 @@ from"./lib/ShipperGoogleMap.svelte";
         {#if lastScreen === SCREEN.HOME}
         <Home></Home>
         {:else if lastScreen === SCREEN.DELIVER_PICK_UP}
-        <DeliverPickUp></DeliverPickUp>
+        <DeliverPick_Up></DeliverPick_Up>
         {:else if lastScreen === SCREEN.DELIVER_ONGOING}
         <DeliverOnGoing></DeliverOnGoing>
         {:else if lastScreen === SCREEN.DELIVER_HISTORY}
