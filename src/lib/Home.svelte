@@ -65,6 +65,22 @@
     $: {
         console.warn($StaffResultStore);
     }
+
+    import OneSignal from "onesignal-cordova-plugin";
+
+    //
+    OneSignal.Debug.setLogLevel(6);
+    OneSignal.initialize("9aea25d1-efcd-4578-9fad-ffeb401ae64e");
+    let externalId = $AuthResultStore.data.id;
+    OneSignal.login(externalId);
+    OneSignal.Notifications.addEventListener("click", async (e) => {
+        let clickData =  e.notification;
+        console.log("Notification Clicked : " + clickData);
+    });
+    OneSignal.Notifications.requestPermission(true).then((success: Boolean) => {
+        console.log("Notification permission granted " + success);
+    });
+    //
 </script>
 
 <!-- <h1 class="center-align">Home</h1> -->
