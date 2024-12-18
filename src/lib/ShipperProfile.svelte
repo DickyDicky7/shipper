@@ -1,4 +1,7 @@
 <script lang="ts">
+    import mary from
+"../assets/mary.png";
+
     const OnClick_CloseButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
@@ -7,6 +10,15 @@
 </script>
 
 <dialog  class="max" id="shipper-profile">
+    <div class="medium-space"></div>
+    <h5  class="center-align">Shipper Profile</h5>
+    <div class="medium-space"></div>
+    <img class="circle extra
+                center
+                    large-elevate                         "
+     src={mary}
+     alt="    "                    >
+    <div class="medium-space"></div>
     <article class="large-elevate no-round inverse-surface">
         <details>
             <summary class="none inverse-primary-text">
@@ -30,5 +42,5 @@
     </div>
 </dialog>
 
-
+<style>img { width: 100px; height: 100px; filter: saturate(150%); }</style>
 

@@ -9,8 +9,9 @@
     import { onDestroy
            , onMount     } from            "svelte"     ;
     import { Geolocation } from "@capacitor/geolocation";
-    import                                 "@maptiler/sdk/dist/maptiler-sdk.css";
-    import { Map, MapStyle, config } from  "@maptiler/sdk"                      ;
+//  import                                 "../../node_modules/@maptiler/sdk/dist/maptiler-sdk.css";
+    import { Language, Marker   ,Map
+           , MapStyle, config } from "@maptiler/sdk";
 
     let apiKey:      string = "b8nZwIxVOLuy2IGSjEJY";
     let mapRef: HTMLElement = null!;
@@ -40,13 +41,29 @@
 //      });
 
         mapIns = new Map({
-            container: mapRef          ,
-                style: MapStyle.STREETS,
-            center: [  position.coords.longitude
-                     , position.coords. latitude
+            antialias:  true                    ,
+            container: mapRef                   ,
+                style: MapStyle.STREETS.DEFAULT ,
+            center: [  position.coords .longitude
+                     , position.coords . latitude
                     ],
-              zoom:16,
+                hash : !true,
+                zoom :    16,
+            keyboard :  true,
+            language : Language.VIETNAMESE,
+            
         });
+        
+        await mapIns.onLoadAsync();
+        new Marker({color: "#386663"})
+        .setLngLat([position.coords.longitude + 0.0001, position.coords.latitude + 0.0000])
+        .addTo(mapIns);
+        new Marker({color: "#BA1A1A"})
+        .setLngLat([position.coords.longitude - 0.0001, position.coords.latitude - 0.0000])
+        .addTo(mapIns);
+        new Marker({color: "#31312B"})
+        .setLngLat([position.coords.longitude + 0.0000, position.coords.latitude + 0.0000])
+        .addTo(mapIns);
 
 //      const markerId = await mapIns.addMarker({
 //          coordinate: {
@@ -106,7 +123,7 @@
 
 <style>
                     .map { display: inline-block; width: 100%; height: 100%; }
-    capacitor-google-map { display: inline-block; width: 100%; height: 100%; }
+/*  capacitor-google-map { display: inline-block; width: 100%; height: 100%; }  */
 </style>
 
 
