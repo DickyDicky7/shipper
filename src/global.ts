@@ -217,7 +217,34 @@ const CurrentDeliveryStore: Writable<Delivery> = writable({
     _id         : ``,
 
 });
-const CurrentOrder___Store: Writable<Order   > = writable();
+const CurrentOrder___Store: Writable<Order   > = writable({
+      senderInfo: { userId     : ``,
+                    name       : ``,
+                    address    : ``,
+                    phoneNumber: ``,
+                  } ,
+    receiverInfo: { userId     : ``,
+                    name       : ``,
+                    address    : ``,
+                    phoneNumber: ``,
+                  } ,
+    deliveryInfo: { shipmentType: ShipmentType.Package,
+                    deliveryType: DeliveryType.Express,
+                    status      : ``,
+                    packageSize : 0 ,
+                    pickupDate  : ``,
+                    pickupTime  : ``,
+                    value       : 0 ,
+                  } ,
+    hubId       : ``,
+    message     : ``,
+    podTxt      : ``,
+    podImg      : ``,
+    payStatus   : ``,
+    payWith     : ``,
+    __v         : 0 ,
+    _id         : ``,
+});
 
 function getUniqueDateTimeString(): string {
     const now          =        new        Date();

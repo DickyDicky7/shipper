@@ -46,9 +46,9 @@
     //     if (isScrolledToBottom()) console.log("bottom");
     // };    
 
-    // onMount(async() => {
-    //         await SelectDeliverOnGoing();
-    // });
+    onMount(async() => {
+            await SelectDeliverOnGoing();
+    });
 </script>
 
 <!-- <div>Deliver OnGoing</div> -->

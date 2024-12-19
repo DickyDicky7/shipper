@@ -40,9 +40,9 @@
         }
     };
 
-    // onMount(async() => {
-    //         await SelectDeliverHistory();
-    // });
+    onMount(async() => {
+            await SelectDeliverHistory();
+    });
 </script>
 
 <!-- <div>Deliver History</div> -->

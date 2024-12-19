@@ -96,10 +96,32 @@ from"./lib/ShipperGoogleMap.svelte";
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button class="circle transparent">
             <i class="fa-solid fa-info"></i>
+            <menu id="info-setting" class="large-elevate padding-small no-wrap vertical">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
+                <div class="space"></div>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
+            </menu>
         </button>
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button class="circle transparent">
             <i class="fa-solid fa-gear"></i>
+            <menu id="gear-setting" class="large-elevate padding-small no-wrap vertical">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
+                <div class="space"></div>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
+            </menu>
         </button>
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button class="circle transparent">
