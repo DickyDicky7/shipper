@@ -21,6 +21,14 @@
            ,      type Photo
     } from "@capacitor/camera";
 
+    const getCurrentDate = (): string => {
+    const now   = new        Date();
+    const  year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, `0`); // Months are zero-based
+    const day   = String(now.getDate ()    ).padStart(2, `0`);
+    return `${year}-${month}-${day}`;
+    };
+
     const OnClick_CloseButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
@@ -52,6 +60,88 @@
         if (updateResult.status === 200
         ||  updateResult.status === 201) {
             await DisplaySuccSnackbar("QR update success", 1000);
+
+            const insertNotificationResult = await axios.post(
+                "/protected/notification",
+                {
+                       orderId: updateResult.data.order.                _id,
+                      senderId: updateResult.data.order.  senderInfo.userId,
+                    receiverId: updateResult.data.order.receiverInfo.userId,
+                          date: getCurrentDate()                           ,
+                        status: updateResult.data.order.deliveryInfo.status,
+                         about:                        "delivery"          ,
+                },
+                {
+                    baseURL: "https://waseminarcnpm2.azurewebsites.net",
+                },
+            );
+            const status: string =
+            updateResult.data.order.deliveryInfo.status;
+            const pushNotification1Result = await axios.post(
+                "/protected/one-signal/send-push-notification/"            ,
+                {
+                        userId: updateResult.data.order.  senderInfo.userId,
+                     contentEn:
+                    status === "inProgress"                         ? "You have delivered to the @carrier@" :
+                    status ===            "success"                 ? "The order has been delivered to the @@@@@@@@@ @@ @@@ receiver" :
+                    status ===                    "failed"          ? "The order has been failed@@@ to be@ delivered to the receiver" :
+                    status ===                           "canceled" ? "The order has been @returned to you" : "~~~",
+                     headingEn: `The order ${updateResult.data.order._id} has an delivery update.`,
+                    subtitleEn: `    Empty                                                       `,
+                },
+                {
+                    baseURL: "https://waseminarcnpm2.azurewebsites.net",
+                },
+            );
+            const pushNotification2Result = await axios.post(
+                "/protected/one-signal/send-push-notification/"            ,
+                {
+                        userId: updateResult.data.order.receiverInfo.userId,
+                     contentEn:
+                    status === "inProgress"                         ? "The order has been delivered to the carrier" :
+                    status ===            "success"                 ? "The order has been delivered to you @@@@@@@" :
+                    status ===                    "failed"          ? "The order has been failed@@@ to be delivered to you (rejected 3 times)" :
+                    status ===                           "canceled" ? "~~~"
+                                                                    : "~~~"                       ,
+                     headingEn: `The order ${updateResult.data.order._id} has an delivery update!`,
+                    subtitleEn: `    Empty                                                       `,
+                },
+                {
+                    baseURL: "https://waseminarcnpm2.azurewebsites.net",
+                },
+            );
+
+
+
+            const           delivery_UpdatedStatusResult1 = await axios.post(
+                "/protected/delivery/update_status"
+                 ,
+                {
+                    deliveryId: $CurrentDeliveryStore?._id ?? "-",
+                        status:
+                        status                                   ,
+                },
+                {
+                    baseURL: "https://waseminarcnpm2.azurewebsites.net"
+                 ,
+                },
+            );
+
+            const oUpdatedResult = await axios.get(
+                       `https://waseminarcnpm2.azurewebsites.net/protected/order?id=${$CurrentDeliveryStore.orderId}`
+            );
+            if (oUpdatedResult.status === 200
+            ||  oUpdatedResult.status === 201) {
+                $CurrentOrder___Store = oUpdatedResult.data ;
+            }
+            
+            const dUpdatedResult = await axios.get(
+         `https://waseminarcnpm2.azurewebsites.net/protected/delivery/id?deliveryId=${$CurrentDeliveryStore.    _id}`
+            );
+            if (dUpdatedResult.status === 200
+            ||  dUpdatedResult.status === 201) {
+                $CurrentDeliveryStore = dUpdatedResult.data ;
+            }
         } else {
             await DisplayFailSnackbar("QR update failure", 1000);
             return;
@@ -167,6 +257,73 @@
             await DisplayFailSnackbar("Step 04 failure", 1000);
             return;
         }
+
+        const oUpdatedResult = await axios.get(
+                   `https://waseminarcnpm2.azurewebsites.net/protected/order?id=${$CurrentDeliveryStore.orderId}`
+        );
+        if (oUpdatedResult.status === 200
+        ||  oUpdatedResult.status === 201) {
+            $CurrentOrder___Store = oUpdatedResult.data ;
+        }
+        
+        const dUpdatedResult = await axios.get(
+     `https://waseminarcnpm2.azurewebsites.net/protected/delivery/id?deliveryId=${$CurrentDeliveryStore.    _id}`
+        );
+        if (dUpdatedResult.status === 200
+        ||  dUpdatedResult.status === 201) {
+            $CurrentDeliveryStore = dUpdatedResult.data ;
+        }
+
+
+        const insertNotificationResult = await axios.post(
+            "/protected/notification",
+            {
+                   orderId: $CurrentOrder___Store.                _id,
+                  senderId: $CurrentOrder___Store.  senderInfo.userId,
+                receiverId: $CurrentOrder___Store.receiverInfo.userId,
+                      date: getCurrentDate()                         ,
+                    status: $CurrentOrder___Store.deliveryInfo.status,
+                     about:                      "delivery"          ,
+            },
+            {
+                baseURL: "https://waseminarcnpm2.azurewebsites.net"  ,
+            },
+        );
+        const status: string =
+        $CurrentOrder___Store.deliveryInfo.status;
+        const pushNotification1Result =            await axios.post(
+            "/protected/one-signal/send-push-notification/"          ,
+            {
+                    userId: $CurrentOrder___Store.  senderInfo.userId,
+                 contentEn:
+                status === "inProgress"                         ? "You have delivered to the @carrier@" :
+                status ===            "success"                 ? "The order has been delivered to the @@@@@@@@@ @@ @@@ receiver" :
+                status ===                    "failed"          ? "The order has been failed@@@ to be@ delivered to the receiver" :
+                status ===                           "canceled" ? "The order has been @returned to you" : "~~~",
+                 headingEn: `The order ${$CurrentOrder___Store._id} has an delivery update.`,
+                subtitleEn: `    Empty                                                     `,
+            },
+            {
+                baseURL: "https://waseminarcnpm2.azurewebsites.net"  ,
+            },
+        );
+        const pushNotification2Result =            await axios.post(
+            "/protected/one-signal/send-push-notification/"          ,
+            {
+                    userId: $CurrentOrder___Store.receiverInfo.userId,
+                 contentEn:
+                status === "inProgress"                         ? "The order has been delivered to the carrier" :
+                status ===            "success"                 ? "The order has been delivered to you @@@@@@@" :
+                status ===                    "failed"          ? "The order has been failed@@@ to be delivered to you (rejected 3 times)" :
+                status ===                           "canceled" ? "~~~"
+                                                                : "~~~"                     ,
+                 headingEn: `The order ${$CurrentOrder___Store._id} has an delivery update!`,
+                subtitleEn: `    Empty                                                     `,
+            },
+            {
+                baseURL: "https://waseminarcnpm2.azurewebsites.net"  ,
+            },
+        );
 
     };
 
