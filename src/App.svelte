@@ -87,6 +87,7 @@ from"./lib/ShipperGoogleMap.svelte";
 </script>
 
 <header class="primary-container fixed">
+    {#if $AuthResultStore.data.token !== ""}
     <nav>
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button class="circle transparent" on:click={OnClick_PressedGo_BackButton}>
@@ -128,6 +129,7 @@ from"./lib/ShipperGoogleMap.svelte";
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
     </nav>
+    {/if}
 </header>
 <main class="responsive">
     {#if $AuthResultStore.data.id !== ""}
@@ -154,6 +156,7 @@ from"./lib/ShipperGoogleMap.svelte";
     <div class="snackbar inverse-surface" id="info-snackbar">Some text here</div>
 </main>
 <footer class="primary-container fixed">
+    {#if $AuthResultStore.data.token !== ""}        
     <nav>
         <div class="max row center-align">
             <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -178,6 +181,7 @@ from"./lib/ShipperGoogleMap.svelte";
             </button>
         </div>
     </nav>
+    {/if}
 </footer>
 
 <style>

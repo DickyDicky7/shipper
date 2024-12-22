@@ -366,18 +366,41 @@
                 <h5  class="center-align">Info Delivery</h5>
                 <div class="medium-space"></div>
                 <article class="large-elevate     no-round
-                                             inverse-surface     ">
-                    <details>
-                        <summary class="none inverse-primary-text">
+                                             inverse-surface                  ">
+                    <details            open                                   >
+                        <summary class="none inverse-primary-text center-align">
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave">Header Item</a>
+                            <a   class="wave row                  center-align">
+                                <i class="tiny-padding fa-solid fa-truck-arrow-right"></i>
+                                Detailed Information
+                                <i class="tiny-padding fa-solid fa-truck-arrow-right"></i>
+                            </a>
                         </summary>
                         <!-- svelte-ignore a11y_missing_attribute -->
-                        <a class="row wave inverse-surface">Deliver Date?!### ######</a>
+                        <a class="row wave inverse-surface">
+                            <i class="tiny-padding fa-solid fa-calendar"></i>
+                            Delivery Date?!
+                            <br>
+                            {$CurrentDeliveryStore
+                        .date}
+                        </a>
+                        <hr>
                         <!-- svelte-ignore a11y_missing_attribute -->
-                        <a class="row wave inverse-surface">Deliver Times!### ######</a>
+                        <a class="row wave inverse-surface">
+                            <i class="tiny-padding fa-solid fa-hashtag "></i>
+                            Delivery Times!
+                            <br>
+                            {$CurrentDeliveryStore.deliverTimes}
+                        </a>
+                        <hr>
                         <!-- svelte-ignore a11y_missing_attribute -->
-                        <a class="row wave inverse-surface">Deliver Status### ######</a>
+                        <a class="row wave inverse-surface">
+                            <i class="tiny-padding fa-solid fa-flag    "></i>
+                            Delivery Status
+                            <br>
+                            {$CurrentDeliveryStore
+                            .status}
+                        </a>
                     </details>
                 </article>
             </div>
@@ -386,59 +409,141 @@
                 <h5  class="center-align">Info Order@@@</h5>
                 <div class="medium-space"></div>
                 <article class="large-elevate     no-round
-                                             inverse-surface     ">
-                    <details>
-                        <summary class="none inverse-primary-text">
+                                             inverse-surface                  ">
+                    <details            open                                   >
+                        <summary class="none inverse-primary-text center-align">
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave">Header Item</a>
+                            <a   class="wave row                  center-align">
+                                <i class="tiny-padding fa-solid fa-dolly"></i>
+                                Detailed Information
+                                <i class="tiny-padding fa-solid fa-dolly"></i>
+                            </a>
                         </summary>
                         <!-- svelte-ignore a11y_missing_attribute -->
-                        <a class="row wave inverse-surface">Item</a>
+                        <!-- <a class="row wave inverse-surface">Item</a> -->
                         <!-- svelte-ignore a11y_missing_attribute -->
-                        <a class="row wave inverse-surface">Item</a>
-                        <details>
-                            <summary class="none inverse-primary-text">
+                        <!-- <a class="row wave inverse-surface">Item</a> -->
+                        <details            open                                   >
+                            <summary class="none inverse-primary-text center-align">
                                 <!-- svelte-ignore a11y_missing_attribute -->
-                                <a class="row wave">Sender Info</a>
+                                <a   class="wave row                  center-align">
+                                    <i class="tiny-padding fa-solid fa-user-plus"></i>
+                                    Sender Info
+                                    <i class="tiny-padding fa-solid fa-user-plus"></i>
+                                </a>
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Sender name### ######</a>
+                            <a class="row wave inverse-surface">
+                                Sender !name?! ??????
+                                <br>
+                                {$CurrentOrder___Store.senderInfo
+                                                      .      name}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Sender address ######</a>
+                            <a class="row wave inverse-surface">
+                                Sender address ??????
+                                <br>
+                                {$CurrentOrder___Store.senderInfo
+                                      .address}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Sender #phone# number</a>
+                            <a class="row wave inverse-surface">
+                                Sender !phone! number
+                                <br>
+                                {$CurrentOrder___Store.senderInfo.phoneNumber}
+                            </a>
                         </details>
-                        <details>
-                            <summary class="none inverse-primary-text">
+                        <details            open                                   >
+                            <summary class="none inverse-primary-text center-align">
                                 <!-- svelte-ignore a11y_missing_attribute -->
-                                <a class="row wave">Receiver Info</a>
+                                <a   class="wave row                  center-align">
+                                    <i class="tiny-padding fa-solid fa-user-minus"></i>
+                                    Receiver Info
+                                    <i class="tiny-padding fa-solid fa-user-minus"></i>
+                                </a>
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Receiver name### ######</a>
+                            <a class="row wave inverse-surface">
+                                Receiver !name?! ??????
+                                <br>
+                                {$CurrentOrder___Store.receiverInfo
+                                                      .        name}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Receiver address ######</a>
+                            <a class="row wave inverse-surface">
+                                Receiver address ??????
+                                <br>
+                                {$CurrentOrder___Store.receiverInfo
+                                        .address}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Receiver #phone# number</a>
+                            <a class="row wave inverse-surface">
+                                Receiver !phone! number
+                                <br>
+                                {$CurrentOrder___Store.receiverInfo.phoneNumber}
+                            </a>
                         </details>
-                        <details>
-                            <summary class="none inverse-primary-text">
+                        <details            open                                   >
+                            <summary class="none inverse-primary-text center-align">
                                 <!-- svelte-ignore a11y_missing_attribute -->
-                                <a class="row wave">Delivery Info</a>
+                                <a   class="wave row                  center-align">
+                                    <i class="tiny-padding fa-solid fa-box-open"></i>
+                                    Delivery Info
+                                    <i class="tiny-padding fa-solid fa-box-open"></i>
+                                </a>
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Shipment type</a>
+                            <a class="row wave inverse-surface">
+                                Shipment type
+                                <br>
+                                {$CurrentOrder___Store.deliveryInfo?.shipmentType ?? "Shipment type"}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Delivery type</a>
+                            <a class="row wave inverse-surface">
+                                Delivery type
+                                <br>
+                                {$CurrentOrder___Store.deliveryInfo?.deliveryType ?? "Delivery type"}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Status</a>
+                            <a class="row wave inverse-surface">
+                                Status
+                                <br>
+                                {$CurrentOrder___Store.deliveryInfo?.status ?? "Status"}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Package size</a>
+                            <a class="row wave inverse-surface">
+                                Package size
+                                <br>
+                                {$CurrentOrder___Store.deliveryInfo?.packageSize ?? 0}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Pick up date</a>
+                            <a class="row wave inverse-surface">
+                                Pick up date
+                                <br>
+                                {$CurrentOrder___Store.deliveryInfo?.pickupDate ?? "01-01-2024"}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Pick up time</a>
+                            <a class="row wave inverse-surface">
+                                Pick up time
+                                <br>
+                                {$CurrentOrder___Store.deliveryInfo?.pickupTime ?? "00:00:0000"}
+                            </a>
+                            <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
-                            <a class="row wave inverse-surface">Value</a>
+                            <a class="row wave inverse-surface">
+                                Value
+                                <br>
+                                {$CurrentOrder___Store.deliveryInfo?.value ?? 0}
+                            </a>
                         </details>
                     </details>
                 </article>
