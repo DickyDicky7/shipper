@@ -98,13 +98,40 @@ from"./lib/ShipperGoogleMap.svelte";
         <button class="circle transparent">
             <i class="fa-solid fa-info"></i>
             <menu id="info-setting" class="large-elevate padding-small no-wrap vertical">
+                <label class="switch icon">
+                    <input type="checkbox" on:change={async (e) => {
+                        if (e.currentTarget.checked) {
+                            await ui("mode"         ,
+                                     "dark"        );
+                        } else                       {
+                            await ui("mode"         ,
+                           "light"                 );
+                        }
+                    }}>
+                    <span>
+                      <i>dark_mode</i>
+                    </span>
+                </label>
+                <div class="space"></div>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" on:change={async (e) => {
+                        if (e.currentTarget.checked) {
+                            await ui("theme", "#3F51B5");
+                        } else                       {
+                            await ui("theme", "#CDDC39");
+                        }
+                    }}>
                     <span></span>
                 </label>
                 <div class="space"></div>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" on:change={async (e) => {
+                        if (e.currentTarget.checked) {
+                            await ui("theme", "#E91E63");
+                        } else                       {
+                            await ui("theme", "#CDDC39");
+                        }
+                    }}>
                     <span></span>
                 </label>
             </menu>
@@ -114,12 +141,35 @@ from"./lib/ShipperGoogleMap.svelte";
             <i class="fa-solid fa-gear"></i>
             <menu id="gear-setting" class="large-elevate padding-small no-wrap vertical">
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" on:change={async (e) => {
+                        if (e.currentTarget.checked) {
+                            await ui("theme", "#F44336");
+                        } else                       {
+                            await ui("theme", "#CDDC39");
+                        }
+                    }}>
                     <span></span>
                 </label>
                 <div class="space"></div>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" on:change={async (e) => {
+                        if (e.currentTarget.checked) {
+                            await ui("theme", "#FFEB3B");
+                        } else                       {
+                            await ui("theme", "#CDDC39");
+                        }
+                    }}>
+                    <span></span>
+                </label>
+                <div class="space"></div>
+                <label class="switch">
+                    <input type="checkbox" on:change={async (e) => {
+                        if (e.currentTarget.checked) {
+                            await ui("theme", "#0000FF");
+                        } else                       {
+                            await ui("theme", "#CDDC39");
+                        }
+                    }}>
                     <span></span>
                 </label>
             </menu>

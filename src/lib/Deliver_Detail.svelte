@@ -346,7 +346,7 @@
 </script>
 
 <dialog  class="max" id="deliver-detail">
-    <div class="padding absolute center     top              "                               >
+    <div class="                                             "                               >
         <div>
             <div class="                  small-space        "></div>
             <nav class="         tabbed   small              ">
@@ -361,7 +361,7 @@
                     <span>Info Order@@@</span>
                 </a>
             </nav>
-            <div class={`page padding left ${tabNumber === 1 ? "active" : ""}`}>
+            <div class={`page   no-padding left ${tabNumber === 1 ? "active" : ""}`}>
                 <div class="medium-space"></div>
                 <h5  class="center-align">Info Delivery</h5>
                 <div class="medium-space"></div>
@@ -404,7 +404,7 @@
                     </details>
                 </article>
             </div>
-            <div class={`page padding left ${tabNumber === 2 ? "active" : ""}`}>
+            <div class={`page   no-padding left ${tabNumber === 2 ? "active" : ""}`}>
                 <div class="medium-space"></div>
                 <h5  class="center-align">Info Order@@@</h5>
                 <div class="medium-space"></div>
@@ -434,6 +434,7 @@
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-signature"></i>
                                 Sender !name?! ??????
                                 <br>
                                 {$CurrentOrder___Store.senderInfo
@@ -442,6 +443,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-location-dot"></i>
                                 Sender address ??????
                                 <br>
                                 {$CurrentOrder___Store.senderInfo
@@ -450,6 +452,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-square-phone"></i>
                                 Sender !phone! number
                                 <br>
                                 {$CurrentOrder___Store.senderInfo.phoneNumber}
@@ -466,6 +469,7 @@
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-signature"></i>
                                 Receiver !name?! ??????
                                 <br>
                                 {$CurrentOrder___Store.receiverInfo
@@ -474,6 +478,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-location-dot"></i>
                                 Receiver address ??????
                                 <br>
                                 {$CurrentOrder___Store.receiverInfo
@@ -482,6 +487,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-square-phone"></i>
                                 Receiver !phone! number
                                 <br>
                                 {$CurrentOrder___Store.receiverInfo.phoneNumber}
@@ -498,6 +504,7 @@
                             </summary>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-cart-flatbed"></i>
                                 Shipment type
                                 <br>
                                 {$CurrentOrder___Store.deliveryInfo?.shipmentType ?? "Shipment type"}
@@ -505,6 +512,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-cart-flatbed"></i>
                                 Delivery type
                                 <br>
                                 {$CurrentOrder___Store.deliveryInfo?.deliveryType ?? "Delivery type"}
@@ -512,6 +520,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-hashtag"></i>
                                 Status
                                 <br>
                                 {$CurrentOrder___Store.deliveryInfo?.status ?? "Status"}
@@ -519,6 +528,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-expand"></i>
                                 Package size
                                 <br>
                                 {$CurrentOrder___Store.deliveryInfo?.packageSize ?? 0}
@@ -526,6 +536,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-calendar-xmark"></i>
                                 Pick up date
                                 <br>
                                 {$CurrentOrder___Store.deliveryInfo?.pickupDate ?? "01-01-2024"}
@@ -533,6 +544,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-calendar-check"></i>
                                 Pick up time
                                 <br>
                                 {$CurrentOrder___Store.deliveryInfo?.pickupTime ?? "00:00:0000"}
@@ -540,6 +552,7 @@
                             <hr>
                             <!-- svelte-ignore a11y_missing_attribute -->
                             <a class="row wave inverse-surface">
+                                <i class="tiny-padding fa-solid fa-dollar-sign"></i>
                                 Value
                                 <br>
                                 {$CurrentOrder___Store.deliveryInfo?.value ?? 0}
@@ -550,20 +563,22 @@
             </div>
         </div>
     </div>
-    <div class="padding absolute center bottom center-align">
-        <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="center-align circle primary-container large-elevate" on:click={OnClick_QRCodeButton}>
-            <i  class="fa-solid fa-qrcode"></i>
-        </button>
-        <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="center-align circle primary-container large-elevate" on:click={OnClick_CameraButton}>
-            <i  class="fa-solid fa-camera"></i>
-        </button>
-        <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="center-align circle primary-container large-elevate" on:click={OnClick_CloseButton}>
-            <i  class="fa-solid fa-xmark"></i>
-        </button>
-    </div>
+    <footer  class="fixed responsive max transparent">
+        <div class="padding absolute center bottom center-align">
+            <!-- svelte-ignore a11y_consider_explicit_label -->
+            <button class="center-align circle tertiary large-elevate" on:click={OnClick_QRCodeButton}>
+                <i  class="fa-solid fa-qrcode"></i>
+            </button>
+            <!-- svelte-ignore a11y_consider_explicit_label -->
+            <button class="center-align circle tertiary large-elevate" on:click={OnClick_CameraButton}>
+                <i  class="fa-solid fa-camera"></i>
+            </button>
+            <!-- svelte-ignore a11y_consider_explicit_label -->
+            <button class="center-align circle error    large-elevate" on:click={OnClick_CloseButton}>
+                <i  class="fa-solid fa-xmark"></i>
+            </button>
+        </div>    
+    </footer>
 </dialog>
 
 
