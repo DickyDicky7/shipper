@@ -29,9 +29,11 @@
         if (authResult.status === 200
         ||  authResult.status === 201) {
             AuthResultStore.set(authResult.data);
-            ui("#succ-snackbar");
+            // ui("#succ-snackbar");
+            await DisplaySuccSnackbar("Sign in success", 5000);
         } else {
-            ui("#fail-snackbar");
+            // ui("#fail-snackbar");
+            await DisplayFailSnackbar("Sign in failure", 5000);
         }
     };
 

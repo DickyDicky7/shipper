@@ -56,13 +56,9 @@
         MyBlurParams(deliverIndex * 100) }>
             <button class="circle inverse-surface"> {deliverIndex} </button>
             <div    class="           max        ">
-                <h6 class="small">Delivery Id:                                                                </h6 >
-                <div>            {deliver._id   }<i class="tiny-padding fa-solid fa-triangle-exclamation"></i></div>
+                <h6 class="small">Delivery Id:   </h6 >
+                <div>            {deliver._id   }</div>
             </div >
-            <label>
-                <i class="tiny-padding fa-solid fa-hashtag"></i>
-                Delivery Status: {deliver.status}
-            </label>
         </div>
   {/each}
 </div>
