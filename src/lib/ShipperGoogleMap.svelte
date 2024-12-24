@@ -10,8 +10,16 @@
            , onMount     } from            "svelte"     ;
     import { Geolocation } from "@capacitor/geolocation";
 //  import                                 "../../node_modules/@maptiler/sdk/dist/maptiler-sdk.css";
-    import { Language, Marker   ,Map
+    import { Language, Marker
+           , Map
            , MapStyle, config } from "@maptiler/sdk";
+    import { GeocodingOpenCage_Async
+           , DisplaySuccSnackbar
+           , DisplayFailSnackbar
+           , DisplayInfoSnackbar
+           , CurrentDeliveryStore
+           , CurrentOrder___Store
+           } from "../global";
 
     let apiKey:      string = "b8nZwIxVOLuy2IGSjEJY";
     let mapRef: HTMLElement = null!;
@@ -41,7 +49,7 @@
 //      });
 
         mapIns = new Map({
-            antialias:  true                    ,
+            antialias: !true                    ,
             container: mapRef                   ,
                 style: MapStyle.STREETS.DEFAULT ,
             center: [  position.coords .longitude
@@ -53,17 +61,6 @@
             language : Language.VIETNAMESE,
             
         });
-        
-        await mapIns.onLoadAsync();
-        new Marker({color: "#386663"})
-        .setLngLat([position.coords.longitude + 0.0001, position.coords.latitude + 0.0000])
-        .addTo(mapIns);
-        new Marker({color: "#BA1A1A"})
-        .setLngLat([position.coords.longitude - 0.0001, position.coords.latitude - 0.0000])
-        .addTo(mapIns);
-        new Marker({color: "#31312B"})
-        .setLngLat([position.coords.longitude + 0.0000, position.coords.latitude + 0.0000])
-        .addTo(mapIns);
 
 //      const markerId = await mapIns.addMarker({
 //          coordinate: {
@@ -104,6 +101,49 @@
                     mapIns.
                     remove();
         }
+    });
+
+    let marker1: Marker = null!;
+    let marker2: Marker = null!;
+    let marker3: Marker = null!;
+    CurrentOrder___Store.subscribe(
+        async (    order )   =>   {
+//      await new Promise(f  =>  setTimeout(f
+//              , 3000) );
+        while (!mapIns)
+        await new Promise(f  =>  setTimeout(f
+                , 1000) );        
+        marker1?.remove();
+        marker2?.remove();
+        marker3?.remove();
+
+        const position = await Geolocation.getCurrentPosition();
+        await mapIns.onLoadAsync();
+
+        let sCoordsResult = await GeocodingOpenCage_Async($CurrentOrder___Store.  senderInfo.address);
+        let rCoordsResult = await GeocodingOpenCage_Async($CurrentOrder___Store.receiverInfo.address);
+        if (sCoordsResult.lng === 0.0
+        &&  sCoordsResult.lat === 0.0) {
+            sCoordsResult = { lng: position.coords.longitude + 0.0001, lat: position.coords.latitude + 0.0000 };
+        }
+        if (rCoordsResult.lng === 0.0
+        &&  rCoordsResult.lat === 0.0) {
+            rCoordsResult = { lng: position.coords.longitude - 0.0001, lat: position.coords.latitude - 0.0000 };
+        }
+        console.log(sCoordsResult);
+        console.log(rCoordsResult);
+
+marker1=new Marker({color: "#386663"})
+//      .setLngLat([position.coords.longitude + 0.0001, position.coords.latitude + 0.0000])
+        .setLngLat([  sCoordsResult.lng               ,   sCoordsResult.lat              ])
+        .addTo(mapIns);
+marker2=new Marker({color: "#BA1A1A"})
+//      .setLngLat([position.coords.longitude - 0.0001, position.coords.latitude - 0.0000])
+        .setLngLat([  rCoordsResult.lng               ,   rCoordsResult.lat              ])
+        .addTo(mapIns);
+marker3=new Marker({color: "#31312B"})
+        .setLngLat([position.coords.longitude + 0.0000, position.coords.latitude + 0.0000])
+        .addTo(mapIns);
     });
 </script>
 

@@ -12,6 +12,8 @@
         DisplayFailSnackbar,
         DisplayInfoSnackbar,
                MyBlurParams,
+        CurrentDeliveryStore,
+        CurrentOrder___Store,
     } from "../global";
     $GeneralDisplayStore.title    =     "Home"   ;
 //  $ScreensHistoryStore.push(    SCREEN.HOME   );
@@ -67,6 +69,9 @@
     }
 
 
+    const a = async() => {
+        $CurrentOrder___Store.senderInfo.address = "Trường tiểu học Nguyễn Thượng Hiền, Hẻm 108/5 Đường Nguyễn Thượng Hiền, Quận Gò Vấp, Thành phố Hồ Chí Minh, Việt Nam"
+    }
     
     import
     OneSignal from
@@ -109,4 +114,5 @@
         <i class="fa-solid fa-question"></i>
         <span>Deliver Unknown</span>
     </button>
+    <button on:click={a}>click</button>
 </div>

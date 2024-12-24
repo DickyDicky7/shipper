@@ -287,6 +287,33 @@ const MyBlurParams = (delay: number): transition.BlurParams => {
     };
 };
 
+import axios
+from  "axios"
+ ;
+
+const GeocodingOpenCage_Async = async (q: string): Promise<{ lat: number, lng: number }> => {
+    const   result =   ({
+        lat: 0.0,
+        lng: 0.0,
+    });
+    const response = await axios.get("https://api.opencagedata.com/geocode/v1/json"
+                                                 ,
+    {
+        params: {
+           key: "0348f6405b984fc6a71cc571e8dfe485"
+    ,        q: q
+    ,   pretty: 1
+    , language:
+      "native"
+    ,
+        }
+    });
+    const responseFirstResult = response.data.results[0]?.geometry;
+    result.lat = responseFirstResult ? parseFloat(responseFirstResult.lat) : result.lat;
+    result.lng = responseFirstResult ? parseFloat(responseFirstResult.lng) : result.lng;
+    return result;
+};
+
 export {
     type AuthResult,
     AuthResultStore,
@@ -307,6 +334,7 @@ export {
     CurrentDeliveryStore,
     CurrentOrder___Store,
     getUniqueDateTimeString,
+    GeocodingOpenCage_Async,
     type QR1,
     QR1Store,
     MyBlurParams,
