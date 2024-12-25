@@ -35,6 +35,48 @@
         await ui("#deliver-detail");
     };
 
+    const OnClick_CancelButton = async (
+        e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    ) => {
+        const               delivery_UpdatedStatusResult = await axios.post(
+                "/protected/delivery/update_status"
+                 ,
+                {
+                    deliveryId: $CurrentDeliveryStore?._id ?? "-",
+                        status:
+                       "failed"                                  ,
+                },
+                {
+                    baseURL: "https://waseminarcnpm2.azurewebsites.net"
+                 ,
+                },
+            );
+            
+        if (delivery_UpdatedStatusResult.status === 200
+        ||  delivery_UpdatedStatusResult.status === 201) {
+            await DisplaySuccSnackbar("Delivery cancel success", 3000);
+        } else                                           {
+            await DisplayFailSnackbar("Delivery cancel failure", 3000);
+        }
+
+        const oUpdatedResult = await axios.get(
+                   `https://waseminarcnpm2.azurewebsites.net/protected/order?id=${$CurrentDeliveryStore.orderId}`
+        );
+        if (oUpdatedResult.status === 200
+        ||  oUpdatedResult.status === 201) {
+            $CurrentOrder___Store = oUpdatedResult.data ;
+        }
+        
+        const dUpdatedResult = await axios.get(
+     `https://waseminarcnpm2.azurewebsites.net/protected/delivery/id?deliveryId=${$CurrentDeliveryStore.    _id}`
+        );
+        if (dUpdatedResult.status === 200
+        ||  dUpdatedResult.status === 201) {
+            $CurrentDeliveryStore = dUpdatedResult.data ;
+        }
+    
+    };
+
     const OnClick_QRCodeButton = async (
         e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
     ) => {
@@ -565,6 +607,10 @@
     </div>
     <footer  class="fixed responsive max transparent">
         <div class="padding absolute center bottom center-align">
+            <!-- svelte-ignore a11y_consider_explicit_label -->
+            <button class="center-align circle error    large-elevate" on:click={OnClick_CancelButton}>
+                <i  class="fa-solid fa-ban"></i>
+            </button>
             <!-- svelte-ignore a11y_consider_explicit_label -->
             <button class="center-align circle tertiary large-elevate" on:click={OnClick_QRCodeButton}>
                 <i  class="fa-solid fa-qrcode"></i>
