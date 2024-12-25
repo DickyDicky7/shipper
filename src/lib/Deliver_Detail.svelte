@@ -178,7 +178,7 @@
             }
             
             const dUpdatedResult = await axios.get(
-         `https://waseminarcnpm2.azurewebsites.net/protected/delivery/id?deliveryId=${$CurrentDeliveryStore.    _id}`
+                       `https://waseminarcnpm2.azurewebsites.net/protected/deliv?id=${$CurrentDeliveryStore.    _id}`
             );
             if (dUpdatedResult.status === 200
             ||  dUpdatedResult.status === 201) {
@@ -309,7 +309,7 @@
         }
         
         const dUpdatedResult = await axios.get(
-     `https://waseminarcnpm2.azurewebsites.net/protected/delivery/id?deliveryId=${$CurrentDeliveryStore.    _id}`
+                   `https://waseminarcnpm2.azurewebsites.net/protected/deliv?id=${$CurrentDeliveryStore.    _id}`
         );
         if (dUpdatedResult.status === 200
         ||  dUpdatedResult.status === 201) {
@@ -374,6 +374,7 @@
     $: (async () => {
         console.info("call!");
         if ($CurrentDeliveryStore.orderId        === ""
+        ||  $CurrentDeliveryStore.orderId        === null
         ||  $CurrentDeliveryStore.orderId.length === 1) {
               return
         }
