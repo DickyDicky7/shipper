@@ -300,7 +300,8 @@ const GeocodingOpenCage_Async = async (q: string): Promise<{ lat: number, lng: n
                                                  ,
     {
         params: {
-           key: "0348f6405b984fc6a71cc571e8dfe485"
+//         key: "0348f6405b984fc6a71cc571e8dfe485"
+           key: "f650506253b34d5482b87e9459cd7823"
     ,        q: q
     ,   pretty: 1
     , language:
